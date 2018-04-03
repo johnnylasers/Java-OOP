@@ -46,6 +46,11 @@ public class TestMyQueue {
 
         assertEquals(2, queue.poll());
         assertEquals(1, queue.size());
+
+        assertEquals(3, queue.poll());
+        assertEquals(0, queue.size());
+
+
     }
 
     @Test

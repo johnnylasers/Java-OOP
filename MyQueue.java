@@ -49,6 +49,9 @@ public class MyQueue {
         int output = head.val;
         head = head.next;
         size--;
+
+        if (isEmpty()) tail = null; //Actually, at this point, head == tail
+
         return output;
     }
 
