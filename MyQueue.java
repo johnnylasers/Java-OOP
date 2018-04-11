@@ -2,7 +2,7 @@ package OOP;
 
 import java.util.NoSuchElementException;
 
-public class MyQueue {
+public class MyQueue<T> {
     // Use cases:
     // boolean isEmpty();
     // int size();
@@ -23,7 +23,7 @@ public class MyQueue {
     }
 
     // Methods:
-    public void offer(int val) {
+    public synchronized void offer(T val) {
         Node node = new Node(val);
 
         if (size == 0) {
@@ -35,18 +35,18 @@ public class MyQueue {
         size++;
     }
 
-    public int peek() {
+    public synchronized T peek() {
         if (size == 0) {
             throw new NoSuchElementException();
         }
         return head.val;
     }
 
-    public int poll() {
+    public synchronized T poll() {
         if (size == 0) {
             throw new NoSuchElementException();
         }
-        int output = head.val;
+        T output = head.val;
         head = head.next;
         size--;
 
@@ -55,20 +55,20 @@ public class MyQueue {
         return output;
     }
 
-    public int size() {
+    public synchronized int size() {
         return size;
     }
 
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return size == 0;
     }
 
     private class Node {
-        private int val;
+        private T val;
         private Node next;
 
         // it's better to be package-private than being public
-        Node(int val) {
+        Node(T val) {
             this.val = val;
             this.next = null;
         }
