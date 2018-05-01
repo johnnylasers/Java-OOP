@@ -54,6 +54,8 @@ public class MinHeap {
         return heapArray[0];
     }
 
+    // add to the last empty spot first (resize array if needed to)
+    // then percolate up to the proper position to main minheap property
     public void offer(int e) {
         if (size == heapArray.length) {
             int[] oldArray = heapArray;
@@ -66,6 +68,9 @@ public class MinHeap {
         percolateUp(size - 1);
     }
 
+    // poll the root
+    // the last element comes to occupy the root spot
+    // then percolate down to proper position
     public int poll() {
         if (size == 0) {
             throw new NullPointerException("Illegal operation. Heap is empty!");
@@ -96,12 +101,17 @@ public class MinHeap {
         return oldValue;
     }
 
+    // remember, heap is conceptually a COMPLETE tree
+    // we only need to percolate the first half of the elements, which have children
     private void heapify() {
         for (int i = size / 2 - 1; i >= 0; i--) {
             percolateDown(i);
         }
     }
 
+    // current node compares with its child/children,
+    // and swaps with its smallest child if it's larger than either one of its children
+    // also we need to make sure it doesn't exceed the boundary of the last element
     private void percolateDown(int index) {
 
         while (index <= (size - 2) / 2) { // <==> 2 * index + 1 <= size - 1
@@ -126,6 +136,9 @@ public class MinHeap {
         }
     }
 
+    // the current node compares with its parent,
+    // if larger (minHeap), then swap with its parent
+    // keep doing this until at root
     private void percolateUp(int index) {
         while (index > 0) {
             int parentIndex = (index - 1) / 2;
